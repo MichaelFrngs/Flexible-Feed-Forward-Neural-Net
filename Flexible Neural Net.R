@@ -5,11 +5,11 @@ library(MASS)
 library(neuralnet)
 
 
-########INPUTS######### ########INPUTS######### ########INPUTS######### ########INPUTS######### ########INPUTS#########
+########INPUTS#########
 
 #Sets Target Variable (variable we're predicting) 
 #Set this to the name of the column you're predicting.
-TargetVariable = "z" #You can enter two variables using c("x1",x2"). Output will be a little buggy though
+TargetVariable = "z" #You can enter two variables using c("x1",x2"). 
 
 NeuralNetNodeStructure =  c(10,5) #first hidden layer is 4 nodes, second hidden layer is 2 nodes
 WhereToSplitDataSet = 7     #Which row should we split the data into two sets (training/test set)
@@ -37,7 +37,7 @@ hist(InitialDataSet[,TargetVariable]) #We see that the data is left skewed
 apply(InitialDataSet,2,range) #Range returns the minimum & the maximum. We see that the scale of each variable is not the same. 
 
 #We want to normalize the data, in other words, replace the values with something from 0 to 1. [Called normalized data in interval [0,1]]
-#Normalizing data prevents any one variable from dominating the others.
+#Normalizing data prevents any one column from dominating the others.
 
 #Get the max of every column
 maxValue = apply(InitialDataSet,2,max)
@@ -79,7 +79,7 @@ neuralModel = neuralnet(formula = FormYooLah,
                         stepmax=1e+07,   #If your neural network is not convering, you must make this higher. Increase calculation time exponentially.
                         threshold=0.0001) #Lower is more accurate. If your neural network is not convering, you must make this higher. Does not increase calculation time. 
 
-#You can take a look at the neural network to see if it worked properly. You should see 13 starting vars on the left.
+#You can take a look at the neural network to see if it worked properly. 
 plot(neuralModel)
 
 #compute(InitialDataSet, predictorVariables) #Notice the results are still scaled and bounded from 0 to 1
